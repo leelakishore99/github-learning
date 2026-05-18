@@ -1,4 +1,4 @@
-
+//KFC site login functionality Testing
 import {test,expect} from '@playwright/test';
 
 test('KFC', async({page})=>{
