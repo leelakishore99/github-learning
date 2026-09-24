@@ -1,0 +1,14 @@
+[
+    {
+        "id":1,
+        "username":"Admin",
+        "password":"admin123",
+        "expectedTitle":"OrangeHRM"
+    },
+    {
+        "id":2,
+        "username":"User",
+        "password":"admin123",
+        "expectedTitle":"OrangeHRM"
+    }
+]
