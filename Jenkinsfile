@@ -2,24 +2,28 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                bat 'echo Checking out source code'
+	    stage('Environment check'){
+            steps{
+                bat 'node --version'
+                bat 'npm --version'
+            }
+		}
+        stage('Install dependencies'){
+            steps{
+                bat 'npm ci'
             }
         }
-
-        stage('Test') {
-            steps {
-                bat 'echo Running automated test'
+        stage('Install browser'){
+            steps{
+                bat 'npx playwright install chromium'
             }
         }
-
-        stage('Report') {
-            steps {
-                bat 'echo Generating the test report'
+        stage('Test'){
+            steps{
+                bat 'npx playwright test'
             }
         }
-    }
+	}
     post{
         always{
             echo 'Pipeline execution completed'
