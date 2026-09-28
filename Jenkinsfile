@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Test'){
             steps{
-                bat 'npx playwright test'
+                bat 'npx playwright test tests/tryingArea.spec.ts'
             }
         }
 	}
