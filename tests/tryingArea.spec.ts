@@ -20,4 +20,4 @@ test(`Verifying in ${row.Id} User`,async({page})=>{
     const welcomeMessage = await welcome.innerText();
     console.log(welcomeMessage);
 });
-}
+//made error in the code by removing the ' } ' from here 
