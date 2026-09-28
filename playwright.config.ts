@@ -21,7 +21,10 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter:[
+  ['html'],
+  ['junit', { outputFile: 'test-results/results.xml' }],
+],
   /* Shared settings for all the projects below. */
   use: {
     headless:true,
@@ -30,6 +33,8 @@ export default defineConfig({
     /* Ignore SSL certificate errors globally */
     ignoreHTTPSErrors: true,
     baseURL: 'https://senthilsmartqahub.blogspot.com',
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure'
   },
 
   /* Configure projects for major browsers */
