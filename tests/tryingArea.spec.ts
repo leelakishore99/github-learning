@@ -1,4 +1,4 @@
-import{test} from '@playwright/test';
+import{test,expect} from '@playwright/test';
 import { getData } from '../utils/PropertyReeadertry';
 import { getExcelData } from '../utils/ExcelReader';
 const config = getData();
@@ -19,5 +19,6 @@ test(`Verifying in ${row.Id} User`,async({page})=>{
     const welcome = page.locator("//p[@id='welcomeUser']");
     const welcomeMessage = await welcome.innerText();
     console.log(welcomeMessage);
+    expect(welcomeMessage).toBe('Leela');
 });
-//made error in the code by removing the ' } ' from here 
+}
