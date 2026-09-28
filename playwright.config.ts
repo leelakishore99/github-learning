@@ -1,5 +1,12 @@
 import { defineConfig, devices } from '@playwright/test';
+const environment = process.env.TEST_ENV || 'qa';
 
+const urls: Record<string, string> = {
+  qa:'https://senthilsmartqahub.blogspot.com/2025/06/banking-application.html',
+  staging: 'https://senthilsmartqahub.blogspot.com/2025/06/banking-application.html',
+};
+
+const baseURL = urls[environment];
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -32,7 +39,8 @@ export default defineConfig({
     trace: 'on-first-retry',
     /* Ignore SSL certificate errors globally */
     ignoreHTTPSErrors: true,
-    baseURL: 'https://senthilsmartqahub.blogspot.com',
+    baseURL: baseURL,
+    
     screenshot: 'only-on-failure',
     video: 'retain-on-failure'
   },

@@ -1,6 +1,9 @@
 pipeline {
     agent any
 
+    environment {
+        BASE_URL = 'https://senthilsmartqahub.blogspot.com'
+    }
     stages {
 	    stage('Environment check'){
             steps{
@@ -33,7 +36,7 @@ pipeline {
 
             archiveArtifacts artifacts: 'test-results/**',
                      allowEmptyArchive: true
-                     
+
             junit 'test-results/results.xml'
         }
         success{

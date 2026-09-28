@@ -7,7 +7,8 @@ const excel = getExcelData('TestData.xlsx','Sheet1') as any[];
 for(let row of excel){
 test(`Verifying in ${row.Id} User`,async({page})=>{
     const config = getData();
-    await page.goto(config.baseurl);
+    //await page.goto(config.baseurl);
+    await page.goto('/',{waitUntil:'domcontentloaded'});
 
     await page.getByPlaceholder('Enter your username').fill(row.Username);
     //await page.waitForTimeout(3000);
