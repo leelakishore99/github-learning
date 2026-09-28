@@ -27,6 +27,12 @@ pipeline {
     post{
         always{
             echo 'Pipeline execution completed'
+
+            archiveArtifacts artifacts: 'playwright-report/**',
+                     allowEmptyArchive: true
+
+            archiveArtifacts artifacts: 'test-results/**',
+                     allowEmptyArchive: true
         }
         success{
             echo 'Pipeline completed successfully'
