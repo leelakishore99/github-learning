@@ -33,6 +33,8 @@ pipeline {
 
             archiveArtifacts artifacts: 'test-results/**',
                      allowEmptyArchive: true
+                     
+            junit 'test-results/results.xml'
         }
         success{
             echo 'Pipeline completed successfully'
