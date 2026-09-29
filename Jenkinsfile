@@ -7,6 +7,11 @@ pipeline {
             choices: ['qa', 'staging'],
             description: 'Select the environment'
         )
+        choice(
+        name: 'BROWSER',
+        choices: ['chromium', 'firefox', 'webkit'],
+        description: 'Select the browser'
+    )
     }
 
     stages {
@@ -26,13 +31,13 @@ pipeline {
 
         stage('Install browser') {
             steps {
-                bat 'npx playwright install chromium'
+                bat 'npx playwright install %BROWSER%'
             }
         }
 
         stage('Test') {
             steps {
-
+                bat 'echo Running tests against: %BROWSER%'
                 bat 'echo Running tests against: %TEST_ENV%'
 
                 withCredentials([
@@ -42,7 +47,7 @@ pipeline {
                         passwordVariable: 'TEST_PASSWORD'
                     )
                 ]) {
-                    bat 'npx playwright test tests/tryingArea.spec.ts'
+                    bat 'npx playwright test tests/tryingArea.spec.ts --project=%BROWSER%'
                 }
             }
         }
