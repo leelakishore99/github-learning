@@ -1,11 +1,15 @@
 pipeline {
     agent any
 
-    environment {
-        BASE_URL = 'https://senthilsmartqahub.blogspot.com'
+    parameters {
+        choice(
+            name: 'TEST_ENV',
+            choices: ['qa', 'staging'],
+            description: 'Select the environment'
+        )
     }
     stages {
-	    stage('Environment check'){
+	    stage('Environment check'){ś
             steps{
                 bat 'node --version'
                 bat 'npm --version'
@@ -23,6 +27,7 @@ pipeline {
         }
         stage('Test'){
             steps{
+                bat 'echo Running tests against: %TEST_ENV%'
                 bat 'npx playwright test tests/tryingArea.spec.ts'
             }
         }

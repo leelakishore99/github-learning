@@ -8,7 +8,7 @@ for(let row of excel){
 test(`Verifying in ${row.Id} User`,async({page})=>{
     const config = getData();
     //await page.goto(config.baseurl);
-    await page.goto('/',{waitUntil:'domcontentloaded'});
+    await page.goto('/2025/06/banking-application.html',{waitUntil:'domcontentloaded'});
 
     await page.getByPlaceholder('Enter your username').fill(row.Username);
     //await page.waitForTimeout(3000);

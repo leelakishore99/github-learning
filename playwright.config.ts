@@ -2,8 +2,8 @@ import { defineConfig, devices } from '@playwright/test';
 const environment = process.env.TEST_ENV || 'qa';
 
 const urls: Record<string, string> = {
-  qa:'https://senthilsmartqahub.blogspot.com/2025/06/banking-application.html',
-  staging: 'https://senthilsmartqahub.blogspot.com/2025/06/banking-application.html',
+  qa:'https://senthilsmartqahub.blogspot.com',
+  staging: 'https://senthilsmartqahub.blogspot.com',
 };
 
 const baseURL = urls[environment];
