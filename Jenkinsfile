@@ -8,46 +8,64 @@ pipeline {
             description: 'Select the environment'
         )
     }
+
     stages {
-	    stage('Environment check'){
-            steps{
+
+        stage('Environment check') {
+            steps {
                 bat 'node --version'
                 bat 'npm --version'
             }
-		}
-        stage('Install dependencies'){
-            steps{
+        }
+
+        stage('Install dependencies') {
+            steps {
                 bat 'npm ci'
             }
         }
-        stage('Install browser'){
-            steps{
+
+        stage('Install browser') {
+            steps {
                 bat 'npx playwright install chromium'
             }
         }
-        stage('Test'){
-            steps{
+
+        stage('Test') {
+            steps {
+
                 bat 'echo Running tests against: %TEST_ENV%'
-                bat 'npx playwright test tests/tryingArea.spec.ts'
+
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'playwright-login',
+                        usernameVariable: 'TEST_USERNAME',
+                        passwordVariable: 'TEST_PASSWORD'
+                    )
+                ]) {
+                    bat 'npx playwright test tests/tryingArea.spec.ts'
+                }
             }
         }
-	}
-    post{
-        always{
+    }
+
+    post {
+        always {
             echo 'Pipeline execution completed'
 
             archiveArtifacts artifacts: 'playwright-report/**',
-                     allowEmptyArchive: true
+                             allowEmptyArchive: true
 
             archiveArtifacts artifacts: 'test-results/**',
-                     allowEmptyArchive: true
+                             allowEmptyArchive: true
 
             junit 'test-results/results.xml'
         }
-        success{
+
+        success {
             echo 'Pipeline completed successfully'
         }
-        failure{
+
+        failure {
             echo 'Pipeline failed'
         }
     }
