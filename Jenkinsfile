@@ -9,7 +9,7 @@ pipeline {
         )
     }
     stages {
-	    stage('Environment check'){ś
+	    stage('Environment check'){
             steps{
                 bat 'node --version'
                 bat 'npm --version'
