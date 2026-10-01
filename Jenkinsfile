@@ -35,11 +35,11 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                bat 'echo Running tests against: %BROWSER%'
-                bat 'echo Running tests against: %TEST_ENV%'
+        stage('Parallel Tests') {
+        parallel {
 
+        stage('Trying Area Tests') {
+            steps {
                 withCredentials([
                     usernamePassword(
                         credentialsId: 'playwright-login',
@@ -47,12 +47,20 @@ pipeline {
                         passwordVariable: 'TEST_PASSWORD'
                     )
                 ]) {
+                    bat 'echo Starting Trying Area tests'
                     bat 'npx playwright test tests/tryingArea.spec.ts --project=%BROWSER% --workers=1'
-
-                    bat 'npx playwright test tests/pomOrangeHRMLogin.spec.ts --project=%BROWSER% --workers=1'
                 }
             }
         }
+
+        stage('OrangeHRM Tests') {
+            steps {
+                bat 'echo Starting OrangeHRM tests'
+                bat 'npx playwright test tests/pomOrangeHRMLogin.spec.ts --project=%BROWSER% --workers=1'
+            }
+        }
+    }
+}
     }
 
     post {
