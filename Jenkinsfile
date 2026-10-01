@@ -47,7 +47,9 @@ pipeline {
                         passwordVariable: 'TEST_PASSWORD'
                     )
                 ]) {
-                    bat 'npx playwright test tests/tryingArea.spec.ts --project=%BROWSER%'
+                    bat 'npx playwright test tests/tryingArea.spec.ts --project=%BROWSER% --workers=1'
+
+                    bat 'npx playwright test tests/starbucks.spec.ts --project=%BROWSER% --workers=1'
                 }
             }
         }
