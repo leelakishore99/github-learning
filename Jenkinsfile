@@ -48,7 +48,7 @@ pipeline {
                     )
                 ]) {
                     bat 'echo Starting Trying Area tests'
-                    bat 'npx playwright test tests/tryingArea.spec.ts tests/pomOrangeHRMLogin.spec.ts --project=%BROWSER% --workers=2'
+                    bat 'npx playwright test tests/tryingArea.spec.ts tests/pomOrangeHRMLogin.spec.ts --project=%BROWSER% --workers=1'
                 }
             }
         }
