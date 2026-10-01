@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    triggers {
+        cron('H/5 * * * *')
+    }
+    
     parameters {
         choice(
             name: 'TEST_ENV',
