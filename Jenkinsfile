@@ -48,17 +48,17 @@ pipeline {
                     )
                 ]) {
                     bat 'echo Starting Trying Area tests'
-                    bat 'npx playwright test tests/tryingArea.spec.ts --project=%BROWSER% --workers=1'
+                    bat 'npx playwright test tests/tryingArea.spec.ts tests/pomOrangeHRMLogin.spec.ts --project=%BROWSER% --workers=1'
                 }
             }
         }
 
-        stage('OrangeHRM Tests') {
-            steps {
-                bat 'echo Starting OrangeHRM tests'
-                bat 'npx playwright test tests/pomOrangeHRMLogin.spec.ts --project=%BROWSER% --workers=1'
-            }
-        }
+        // stage('OrangeHRM Tests') {
+        //     steps {
+        //         bat 'echo Starting OrangeHRM tests'
+        //         bat 'npx playwright test tests/pomOrangeHRMLogin.spec.ts --project=%BROWSER% --workers=1'
+        //     }
+        // }
     }
 }
     }
